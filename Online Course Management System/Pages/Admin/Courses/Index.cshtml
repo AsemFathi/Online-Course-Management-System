@@ -1,0 +1,75 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Admin.Courses.IndexModel
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<div class="container mt-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">📚 Courses Management</h2>
+        <a asp-page="/Admin/Courses/Add" class="btn btn-success rounded-pill shadow-sm px-4">
+            ➕ Add New Course
+        </a>
+    </div>
+
+    <!-- Courses Table -->
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model.Courses)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-page="/Admin/Courses/CourseDetails" asp-route-title="@course.Title"
+                                   class="fw-semibold text-decoration-none text-dark">
+                                    @course.Title
+                                </a>
+                            </td>
+                            <td>@course.Description</td>
+                            <td>@course.Price.ToString("C")</td>
+                            <td>@course.StartDate.ToShortDateString()</td>
+                            <td>@course.EndDate.ToShortDateString()</td>
+                            <td class="text-center">
+                                <a asp-page="/Admin/Courses/Edit" asp-route-id="@course.Id"
+                                   class="btn btn-sm btn-outline-warning me-2">✏️ Edit</a>
+
+                                <form method="post" asp-page-handler="Delete" asp-route-Id="@course.Id"
+                                      class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"
+                                            onclick="return confirm('Are you sure you want to delete this course?');">
+                                        🗑️ Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="d-flex justify-content-end mt-3">
+        <a asp-page="/Admin/Index" class="btn btn-secondary rounded-pill shadow-sm">⬅️ Back</a>
+    </div>
+</div>
+
+<!-- Extra Styling -->
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f9f9f9;
+        transition: background-color 0.2s ease;
+    }
+</style>

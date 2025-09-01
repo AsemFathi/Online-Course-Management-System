@@ -1,0 +1,56 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Admin.Students.StudentDetailsModel
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <!-- Header -->
+        <div class="card-header bg-info text-white">
+            <h3 class="mb-0">👩‍🎓 Student Details</h3>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+            <!-- Student Info -->
+            <h4 class="text-primary">@Model.Student.Name</h4>
+            <p><strong>📧 Email:</strong> @Model.Student.Email</p>
+
+            <!-- Enrolled Courses -->
+            <h5 class="mt-4">📚 Enrolled Courses</h5>
+            @if (Model.Student.Enrollments.Any())
+            {
+                <table class="table table-striped mt-2">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Course Title</th>
+                            <th>Enrollment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var enrollment in Model.Student.Enrollments)
+                        {
+                            <tr>
+                                <td>@enrollment.Course.Title</td>
+                                <td>@enrollment.EnrollmentDate.ToShortDateString()</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-warning mt-2">
+                    This student is not enrolled in any course.
+                </div>
+            }
+        </div>
+
+        <!-- Footer Buttons -->
+        <div class="card-footer d-flex justify-content-between">
+            <a asp-page="/Admin/Students/Index" class="btn btn-secondary">⬅️ Back</a>
+            <a asp-page="/Admin/Students/Edit" asp-route-id="@Model.Student.UserId" class="btn btn-warning">✏️ Edit Student</a>
+        </div>
+    </div>
+</div>

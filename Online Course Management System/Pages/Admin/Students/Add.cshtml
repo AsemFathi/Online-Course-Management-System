@@ -1,0 +1,58 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Admin.Students.AddModel
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <!-- Header -->
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">👩‍🎓 Add New Student</h3>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+            <form method="post">
+                
+                <!-- Student Name -->
+                <div class="mb-3">
+                    <label asp-for="Student.Name" class="form-label">📝 Full Name</label>
+                    <input asp-for="Student.Name" class="form-control" placeholder="Enter student name" />
+                    <span asp-validation-for="Student.Name" class="text-danger"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label asp-for="Student.Email" class="form-label">📧 Email</label>
+                    <input asp-for="Student.Email" type="email" class="form-control" placeholder="example@student.com" />
+                    <span asp-validation-for="Student.Email" class="text-danger"></span>
+                </div>
+
+                <!-- Username -->
+                <div class="mb-3">
+                    <label asp-for="Student.Username" class="form-label">👤 Username</label>
+                    <input asp-for="Student.Username" class="form-control" placeholder="Choose a username" />
+                    <span asp-validation-for="Student.Username" class="text-danger"></span>
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label asp-for="Student.Password" class="form-label">🔑 Password</label>
+                    <input asp-for="Student.Password" type="password" class="form-control" placeholder="Enter a password" />
+                    <span asp-validation-for="Student.Password" class="text-danger"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/Admin/Students/Index" class="btn btn-secondary">⬅️ Back</a>
+                    <button type="submit" class="btn btn-success">💾 Save Student</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

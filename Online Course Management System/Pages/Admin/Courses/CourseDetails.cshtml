@@ -1,0 +1,58 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Admin.Courses.CourseDetailsModel
+@{
+    ViewData["Title"] = "Course Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0">
+        <!-- Header -->
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">@Model.Course.Title</h3>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+            <p><strong>Description:</strong> @Model.Course.Description</p>
+            <p><strong>Price:</strong> @Model.Course.Price.ToString("C")</p>
+            <p><strong>Start Date:</strong> @Model.Course.StartDate.ToShortDateString()</p>
+            <p><strong>End Date:</strong> @Model.Course.EndDate.ToShortDateString()</p>
+
+            <!-- Enrolled Students -->
+            <h5 class="mt-4">👩‍🎓 Enrolled Students (@Model.Course.Enrollments.Count)</h5>
+            @if (Model.Course.Enrollments.Any())
+            {
+                <ul class="list-group list-group-flush mt-2">
+                    @foreach (var enrollment in Model.Course.Enrollments)
+                    {
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>
+                                <strong>@enrollment.Student.Name</strong> <br />
+                                <small class="text-muted">@enrollment.Student.Email</small>
+                            </span>
+                            <span class="badge bg-info text-dark">ID: @enrollment.Student.Id</span>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <div class="alert alert-warning mt-2">⚠️ No students enrolled yet.</div>
+            }
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer d-flex justify-content-between">
+            <div>
+                <a asp-page="/Admin/Courses/Edit" asp-route-id="@Model.Course.Id"
+                   class="btn btn-outline-warning me-2">✏️ Edit</a>
+
+                <form method="post" asp-page-handler="Delete" asp-route-id="@Model.Course.Id"
+                      class="d-inline" onsubmit="return confirm('Are you sure you want to delete this course?');">
+                    <button type="submit" class="btn btn-outline-danger">🗑️ Delete</button>
+                </form>
+            </div>
+            <a asp-page="/Admin/Courses/Index" class="btn btn-secondary">⬅️ Back</a>
+        </div>
+    </div>
+</div>

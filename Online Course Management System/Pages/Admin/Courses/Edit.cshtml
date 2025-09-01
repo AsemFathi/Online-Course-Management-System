@@ -1,0 +1,67 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Admin.Courses.EditModel
+@{
+    ViewData["Title"] = "Edit Course";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <!-- Header -->
+        <div class="card-header bg-warning text-dark">
+            <h3 class="mb-0">✏️ Edit Course</h3>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+            <form method="post" class="row g-3">
+                <!-- Hidden Id -->
+                <input type="hidden" asp-for="Course.Id" />
+
+                <!-- Course Title -->
+                <div class="col-12">
+                    <label asp-for="Course.Title" class="form-label">📘 Course Title</label>
+                    <input asp-for="Course.Title" class="form-control @(ViewData.ModelState["Course.Title"]?.Errors.Count > 0 ? "is-invalid" : "")" placeholder="Enter course title" />
+                    <span asp-validation-for="Course.Title" class="invalid-feedback"></span>
+                </div>
+
+                <!-- Description -->
+                <div class="col-12">
+                    <label asp-for="Course.Description" class="form-label">📝 Description</label>
+                    <textarea asp-for="Course.Description" class="form-control @(ViewData.ModelState["Course.Description"]?.Errors.Count > 0 ? "is-invalid" : "")" rows="3" placeholder="Enter course description"></textarea>
+                    <span asp-validation-for="Course.Description" class="invalid-feedback"></span>
+                </div>
+
+                <!-- Price -->
+                <div class="col-md-4">
+                    <label asp-for="Course.Price" class="form-label">💲 Price</label>
+                    <input asp-for="Course.Price" type="number" class="form-control @(ViewData.ModelState["Course.Price"]?.Errors.Count > 0 ? "is-invalid" : "")" step="0.01" placeholder="e.g. 199.99" />
+                    <span asp-validation-for="Course.Price" class="invalid-feedback"></span>
+                </div>
+
+                <!-- Start Date -->
+                <div class="col-md-4">
+                    <label asp-for="Course.StartDate" class="form-label">📅 Start Date</label>
+                    <input asp-for="Course.StartDate" type="date" class="form-control @(ViewData.ModelState["Course.StartDate"]?.Errors.Count > 0 ? "is-invalid" : "")" />
+                    <span asp-validation-for="Course.StartDate" class="invalid-feedback"></span>
+                </div>
+
+                <!-- End Date -->
+                <div class="col-md-4">
+                    <label asp-for="Course.EndDate" class="form-label">📅 End Date</label>
+                    <input asp-for="Course.EndDate" type="date" class="form-control @(ViewData.ModelState["Course.EndDate"]?.Errors.Count > 0 ? "is-invalid" : "")" />
+                    <span asp-validation-for="Course.EndDate" class="invalid-feedback"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="col-12 d-flex justify-content-between mt-3">
+                    <a asp-page="/Admin/Courses/Index" class="btn btn-secondary">⬅️ Back</a>
+                    <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to save these changes?');">💾 Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

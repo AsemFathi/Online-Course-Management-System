@@ -1,0 +1,49 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Admin.Enrollments.CreateModel
+@{
+    ViewData["Title"] = "Add Enrollment";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">➕ Add New Enrollment</h3>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+                <!-- Student Dropdown -->
+                <div class="mb-3">
+                    <label asp-for="Enrollment.StudentId" class="form-label">👩‍🎓 Student</label>
+                    <select asp-for="Enrollment.StudentId" class="form-select" asp-items="Model.StudentList">
+                        <option value="">-- Select Student --</option>
+                    </select>
+                    <span asp-validation-for="Enrollment.StudentId" class="text-danger"></span>
+                </div>
+
+                <!-- Course Dropdown -->
+                <div class="mb-3">
+                    <label asp-for="Enrollment.CourseId" class="form-label">📚 Course</label>
+                    <select asp-for="Enrollment.CourseId" class="form-select" asp-items="Model.CourseList">
+                        <option value="">-- Select Course --</option>
+                    </select>
+                    <span asp-validation-for="Enrollment.CourseId" class="text-danger"></span>
+                </div>
+
+                <!-- Enrollment Date -->
+                <div class="mb-3">
+                    <label asp-for="Enrollment.EnrollmentDate" class="form-label">📅 Enrollment Date</label>
+                    <input asp-for="Enrollment.EnrollmentDate" type="date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                    <span asp-validation-for="Enrollment.EnrollmentDate" class="text-danger"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/Admin/Enrollments/Index" class="btn btn-secondary">⬅️ Back</a>
+                    <button type="submit" class="btn btn-success">💾 Save Enrollment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

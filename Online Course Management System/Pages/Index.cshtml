@@ -1,0 +1,22 @@
+﻿@page
+@model Online_Course_Management_System.Pages.IndexModel
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<div class="container text-center mt-5">
+    
+    <!-- Project Title -->
+    <h1 class="display-4 fw-bold text-primary">Online Course Management System</h1>
+    <p class="lead text-muted mt-3">
+        A platform to manage students, courses, and enrollments with ease.  
+        Register now to explore courses or login to continue learning!
+    </p>
+
+    <!-- Buttons -->
+    <div class="mt-4">
+        <a asp-page="/Account/Login" class="btn btn-primary btn-lg mx-2 px-4">Login</a>
+        <a asp-page="/Account/Register" class="btn btn-outline-primary btn-lg mx-2 px-4">Register</a>
+    </div>
+</div>
+

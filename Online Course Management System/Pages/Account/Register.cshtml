@@ -1,0 +1,84 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <!-- Card Header -->
+                <div class="card-header text-center bg-gradient"
+                     style="background: linear-gradient(135deg, #007bff, #6610f2);">
+                    <h3 class="text-black mb-0">✨ Create Your Account</h3>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body p-4">
+                    <form method="post">
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label asp-for="User.Name" class="form-label fw-semibold">📝 Full Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                                <input asp-for="User.Name" class="form-control" placeholder="John Doe" />
+                            </div>
+                            <span asp-validation-for="User.Name" class="text-danger"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label asp-for="User.Email" class="form-label fw-semibold">📧 Email</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-envelope"></i></span>
+                                <input asp-for="User.Email" type="email" class="form-control" placeholder="example@mail.com" />
+                            </div>
+                            <span asp-validation-for="User.Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label asp-for="User.Username" class="form-label fw-semibold">👤 Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-person-badge"></i></span>
+                                <input asp-for="User.Username" class="form-control" placeholder="Choose a username" />
+                            </div>
+                            <span asp-validation-for="User.Username" class="text-danger"></span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label asp-for="User.Password" class="form-label fw-semibold">🔑 Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-lock"></i></span>
+                                <input asp-for="User.Password" type="password" class="form-control" placeholder="Enter password" />
+                            </div>
+                            <span asp-validation-for="User.Password" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn btn-primary w-100 py-2 rounded-pill shadow-sm">
+                            🚀 Register
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Footer -->
+                <div class="card-footer text-center bg-light">
+                    <small class="text-muted">
+                        Already have an account? <a asp-page="/Account/Login" class="text-decoration-none">Login here</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

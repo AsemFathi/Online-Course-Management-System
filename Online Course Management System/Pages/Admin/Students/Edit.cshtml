@@ -1,0 +1,53 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Admin.Students.EditModel
+@{
+    ViewData["Title"] = "Edit Student";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <!-- Header -->
+        <div class="card-header bg-info text-white">
+            <h3 class="mb-0">✏️ Edit Student</h3>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+            <form method="post">
+                <!-- Hidden Id -->
+                <input type="hidden" asp-for="User.Id" />
+
+                <!-- Student Name -->
+                <div class="mb-3">
+                    <label asp-for="User.Student.Name" class="form-label">👩‍🎓 Full Name</label>
+                    <input asp-for="User.Student.Name" class="form-control" placeholder="Enter student name" />
+                    <span asp-validation-for="User.Student.Name" class="text-danger"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label asp-for="User.Student.Email" class="form-label">📧 Email</label>
+                    <input asp-for="User.Student.Email" type="email" class="form-control" placeholder="example@student.com" />
+                    <span asp-validation-for="User.Student.Email" class="text-danger"></span>
+                </div>
+
+                <!-- Username (if you want to allow editing) -->
+                <div class="mb-3">
+                    <label asp-for="User.Username" class="form-label">👤 Username</label>
+                    <input asp-for="User.Username" class="form-control" placeholder="Edit username" />
+                    <span asp-validation-for="User.Username" class="text-danger"></span>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/Admin/Students/Index" class="btn btn-secondary">⬅️ Back</a>
+                    <button type="submit" class="btn btn-success">💾 Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

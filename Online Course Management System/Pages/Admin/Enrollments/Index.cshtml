@@ -1,0 +1,63 @@
+﻿@page
+@model Online_Course_Management_System.Pages.Admin.Enrollments.IndexModel
+@{
+    ViewData["Title"] = "All Enrollments";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+        <!-- Header -->
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h3 class="mb-0">📚 All Enrollments</h3>
+            <a asp-page="/Admin/Enrollments/Create" class="btn btn-light btn-sm">➕ Add New Enrollment</a>
+        </div>
+
+        <!-- Body -->
+        <div class="card-body">
+            @if (Model.Enrollments.Any())
+            {
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>👩‍🎓 Student Name</th>
+                            <th>📧 Email</th>
+                            <th>📖 Course</th>
+                            <th>📅 Enrollment Date</th>
+                            <th class="text-center">⚙️ Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var enrollment in Model.Enrollments)
+                        {
+                            <tr>
+                                <td>@enrollment.Student.Name</td>
+                                <td>@enrollment.Student.Email</td>
+                                <td>@enrollment.Course.Title</td>
+                                <td>@enrollment.EnrollmentDate.ToShortDateString()</td>
+                                <td class="text-center">
+                                    <form method="post" asp-page-handler="Delete" asp-route-id="@enrollment.EnrollmentId" class="d-inline">
+                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Are you sure you want to delete this enrollment?');">
+                                            🗑️ Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    ⚠️ No enrollments found.
+                </div>
+            }
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer d-flex justify-content-end">
+            <a asp-page="/Admin/Index" class="btn btn-secondary">⬅️ Back</a>
+        </div>
+    </div>
+</div>
