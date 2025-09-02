@@ -56,22 +56,35 @@ namespace Online_Course_Management_System.Pages.Admin.Students
 
         public List<Student> Students { get; set; } = new List<Student>();
         public List<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+        public string SearchTerm { get; set; }
 
-        public void OnGet()
+        
+        
+        public async Task OnGetAsync(string searchTerm)
         {
-            // Load Students and their Enrollments from DB
+
             Students = _context.Students
-                               .Include(s => s.Enrollments) 
+                               .Include(s => s.Enrollments)
                                .ToList();
 
             Enrollments = _context.Enrollments
                                   .Include(e => e.Student)
                                   .Include(e => e.Course)
                                   .ToList();
+
+            SearchTerm = searchTerm;
+            if (!string.IsNullOrEmpty(SearchTerm))
+            {
+                Students = Students.Where(u => u.Name.Contains(SearchTerm) || u.Email.Contains(SearchTerm)).ToList();
+            }
+            
+            
         }
 
         public IActionResult OnPostDelete(int id)
         {
+
+
             var student = _context.Students.Find(id);
             if (student != null)
             {
@@ -80,5 +93,7 @@ namespace Online_Course_Management_System.Pages.Admin.Students
             }
             return RedirectToPage();
         }
+        
+
     }
 }
